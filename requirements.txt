@@ -1,5 +1,6 @@
 fastapi
 scikit-learn
 pandas
+uvicorn
 # pydantic
 # pickle
