@@ -1,6 +1,6 @@
-fastapi
-scikit-learn
-pandas
-uvicorn
+fastapi=0.115.12
+scikit-learn=1.5.1
+pandas=2.2.2
+uvicorn=0.34.3
 # pydantic
 # pickle
