@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iris Flower Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Iris Species Prediction</h2>
+    <form id="predict-form">
+        <label>Sepal Length (cm):</label>
+        <input type="number" id="sepalLength" step="any" required>
+
+        <label>Sepal Width (cm):</label>
+        <input type="number" id="sepalWidth" step="any" required>
+
+        <label>Petal Length (cm):</label>
+        <input type="number" id="petalLength" step="any" required>
+
+        <label>Petal Width (cm):</label>
+        <input type="number" id="petalWidth" step="any" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('predict-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const data = {
+                SepalLengthCm: parseFloat(document.getElementById('sepalLength').value),
+                SepalWidthCm: parseFloat(document.getElementById('sepalWidth').value),
+                PetalLengthCm: parseFloat(document.getElementById('petalLength').value),
+                PetalWidthCm: parseFloat(document.getElementById('petalWidth').value)
+            };
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                document.getElementById('result').textContent = result.response;
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error contacting the prediction API.';
+            }
+        });
+    </script>
+</body>
+</html>
