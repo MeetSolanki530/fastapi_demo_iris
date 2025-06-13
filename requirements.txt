@@ -1,5 +1,5 @@
 fastapi
 scikit-learn
 pandas
-pydantic
-pickle
+# pydantic
+# pickle
